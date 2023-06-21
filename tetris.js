@@ -3,7 +3,8 @@ import {
   PLAYFIELD_ROWS,
   TETROMINO_NAMES,
   TETROMINOES,
-  getRandomElement
+  getRandomElement,
+  rotateMatrix,
 } from "./utilities.js";
 
 export class Tetris {
@@ -35,7 +36,24 @@ export class Tetris {
       name,
       matrix,
       row,
-      column
+      column,
     };
+  }
+
+  moveTetrominoDown() {
+    this.tetromino.row += 1;
+  }
+
+  moveTetrominoLeft() {
+    this.tetromino.column -= 1;
+  }
+
+  moveTetrominoRight() {
+    this.tetromino.column += 1;
+  }
+
+  rotateTetromino() {
+    const rotatedMatrix = rotateMatrix(this.tetromino.matrix);
+    this.tetromino.matrix = rotatedMatrix;
   }
 }

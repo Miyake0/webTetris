@@ -2,37 +2,37 @@ export const PLAYFIELD_COLUMNS = 10;
 export const PLAYFIELD_ROWS = 20;
 export const TETROMINO_NAMES = ["I", "J", "L", "O", "S", "Z", "T"];
 export const TETROMINOES = {
-  "I": [
+  I: [
     [0, 0, 0, 0],
     [1, 1, 1, 1],
     [0, 0, 0, 0],
     [0, 0, 0, 0],
   ],
-  "J": [
+  J: [
     [1, 0, 0],
     [1, 1, 1],
     [0, 0, 0],
   ],
-  "L": [
+  L: [
     [0, 0, 1],
     [1, 1, 1],
     [0, 0, 0],
   ],
-  "O": [
+  O: [
     [1, 1],
     [1, 1],
   ],
-  "S": [
+  S: [
     [0, 1, 1],
     [1, 1, 0],
     [0, 0, 0],
   ],
-  "Z": [
+  Z: [
     [1, 1, 0],
     [0, 1, 1],
     [0, 0, 0],
   ],
-  "T": [
+  T: [
     [0, 1, 0],
     [1, 1, 1],
     [0, 0, 0],
@@ -46,4 +46,16 @@ export function getRandomElement(array) {
 
 export function convertPositionToIndex(row, column) {
   return row * PLAYFIELD_COLUMNS + column;
+}
+
+export function rotateMatrix(matrix) {
+  const N = matrix.length;
+  const rotatedMatrix = [];
+  for (let i = 0; i < N; i++) {
+    rotatedMatrix[i] = [];
+    for (let j = 0; j < N; j++) {
+      rotatedMatrix[i][j] = matrix[N - j - 1][i];
+    }
+  }
+  return rotatedMatrix;
 }
