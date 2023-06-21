@@ -33,3 +33,42 @@ body {
   border-radius: 0.3vh;
   background-color: plum;
 }
+
+.grid > div.I {
+  background-color: rgb(183, 36, 183);
+}
+
+.grid > div.J {
+  background-color: rgb(62, 7, 62);
+}
+
+.grid > div.L {
+  background-color: rgb(116, 18, 82);
+}
+
+.grid > div.O {
+  background-color: rgb(156, 36, 183);
+}
+
+.grid > div.S {
+  background-color: rgb(250, 6, 156);
+}
+
+.grid > div.Z {
+  background-color: rgb(65, 14, 116);
+}
+
+.grid > div.T {
+  background-color: rgb(137, 63, 233);
+}
+
+.grid > div.I,
+.grid > div.J,
+.grid > div.L,
+.grid > div.O,
+.grid > div.S,
+.grid > div.Z,
+.grid > div.T {
+  box-shadow: inset 2px 2px 2px rgba(255, 255, 255, 0.2),
+    inset -2px -2px 2px rgba(1, 8, 89, 0.2);
+}
