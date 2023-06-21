@@ -1,5 +1,10 @@
 import { Tetris } from "./tetris.js";
-import { convertPositionToIndex, rotateMatrix } from "./utilities.js";
+import {
+  PLAYFIELD_COLUMNS,
+  PLAYFIELD_ROWS,
+  convertPositionToIndex,
+  rotateMatrix,
+} from "./utilities.js";
 
 const tetris = new Tetris();
 const cells = document.querySelectorAll(".grid>div");
@@ -53,7 +58,19 @@ function rotate() {
 
 function draw() {
   cells.forEach((cell) => cell.removeAttribute("class"));
+  drawPlayField();
   drawTetromino();
+}
+
+function drawPlayField() {
+  for (let row = 0; row < PLAYFIELD_ROWS; row++) {
+    for (let column = 0; column < PLAYFIELD_COLUMNS; column++) {
+      if (!tetris.playfield[row][column]) continue;
+      const name = tetris.playfield[row][column];
+      const cellIndex = convertPositionToIndex(row, column);
+      cells[cellIndex].classList.add(name);
+    }
+  }
 }
 
 function drawTetromino() {
