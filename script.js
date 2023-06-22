@@ -6,12 +6,14 @@ import {
   rotateMatrix,
 } from "./utilities.js";
 
+let hammer;
 let requestId;
 let timeoutId;
 const tetris = new Tetris();
 const cells = document.querySelectorAll(".grid>div");
 
 initKeyDown();
+initTouch();
 
 moveDown();
 
@@ -39,6 +41,57 @@ function onkeydown(event) {
     default:
       break;
   }
+}
+
+function initTouch() {
+  document.addEventListener("dbclick", (event) => {
+    event.preventDefault();
+  });
+
+  hammer = new Hammer(document.querySelector("body"));
+  hammer.get("pan").set({ direction: Hammer.DIRECTION_ALL });
+  hammer.get("swipe").set({ direction: Hammer.DIRECTION_ALL });
+
+  const threshold = 30;
+  let deltaX = 0;
+  let deltaY = 0;
+
+  hammer.on("panstart", () => {
+    deltaX = 0;
+    deltaY = 0;
+  });
+
+  hammer.on("panleft", (event) => {
+    if (Math.abs(event.deltaX - deltaX) > threshold) {
+      moveLeft();
+      deltaX = event.deltaX;
+      deltaY = event.deltaY;
+    }
+  });
+
+  hammer.on("panright", (event) => {
+    if (Math.abs(event.deltaX - deltaX) > threshold) {
+      moveRight();
+      deltaX = event.deltaX;
+      deltaY = event.deltaY;
+    }
+  });
+
+  hammer.on("pandown", (event) => {
+    if (Math.abs(event.deltaY - deltaY) > threshold) {
+      moveDown();
+      deltaX = event.deltaX;
+      deltaY = event.deltaY;
+    }
+  });
+
+  hammer.on("swipedown", (event) => {
+    dropDown();
+  });
+
+  hammer.on("tap", () => {
+    rotate();
+  });
 }
 
 function moveDown() {
@@ -123,11 +176,6 @@ function drawTetromino() {
   }
 }
 
-function gameOver() {
-  stopLoop();
-  document.removeEventListener("keydown", onkeydown);
-}
-
 function drawGhostTetromino() {
   const tetrominoMatrixSize = tetris.tetromino.matrix.length;
   for (let row = 0; row < tetrominoMatrixSize; row++) {
@@ -141,4 +189,10 @@ function drawGhostTetromino() {
       cells[cellIndex].classList.add("ghost");
     }
   }
+}
+
+function gameOver() {
+  stopLoop();
+  document.removeEventListener("keydown", onkeydown);
+  hammer.off("panstart panleft panright pandown swipedown tap");
 }
