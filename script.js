@@ -4,6 +4,7 @@ import {
   PLAYFIELD_ROWS,
   convertPositionToIndex,
   rotateMatrix,
+  SAD,
 } from "./utilities.js";
 
 let hammer;
@@ -195,4 +196,26 @@ function gameOver() {
   stopLoop();
   document.removeEventListener("keydown", onkeydown);
   hammer.off("panstart panleft panright pandown swipedown tap");
+  gameOverAnimation();
+}
+
+function gameOverAnimation() {
+  const filledCells = [...cells].filter((cell) => cell.classList.length > 0);
+  filledCells.forEach((cell, i) => {
+    setTimeout(() => cell.classList.add("hide"), i * 10);
+    setTimeout(() => cell.removeAttribute("class"), i * 10 + 500);
+  });
+
+  setTimeout(drawSad, filledCells.length * 10 + 1000);
+}
+
+function drawSad() {
+  const TOP_OFFSET = 5;
+  for (let row = 0; row < SAD.length; row++) {
+    for (let column = 0; column < SAD[0].length; column++) {
+      if (!SAD[row][column]) continue;
+      const cellIndex = convertPositionToIndex(TOP_OFFSET + row, column);
+      cells[cellIndex].classList.add("sad");
+    }
+  }
 }

@@ -73,7 +73,17 @@ body {
 .grid > div.S,
 .grid > div.Z,
 .grid > div.T,
-.grid > div.ghost {
+.grid > div.ghost,
+.grid > div.sad {
   box-shadow: inset 2px 2px 2px rgba(255, 255, 255, 0.2),
     inset -2px -2px 2px rgba(1, 8, 89, 0.2);
+}
+
+.grid > div.sad {
+  background-color: bisque;
+  transition: background-color 0.5s, box-shadow 0.5s;
+}
+
+.grid > div.hide {
+  animation: hide 0.5s;
 }
