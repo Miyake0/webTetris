@@ -34,6 +34,10 @@ body {
   background-color: plum;
 }
 
+.grid > div.ghost {
+  background-color: rgb(230, 79, 94);
+}
+
 .grid > div.I {
   background-color: rgb(183, 36, 183);
 }
@@ -68,7 +72,8 @@ body {
 .grid > div.O,
 .grid > div.S,
 .grid > div.Z,
-.grid > div.T {
+.grid > div.T,
+.grid > div.ghost {
   box-shadow: inset 2px 2px 2px rgba(255, 255, 255, 0.2),
     inset -2px -2px 2px rgba(1, 8, 89, 0.2);
 }
