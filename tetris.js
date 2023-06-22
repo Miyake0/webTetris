@@ -57,6 +57,8 @@ export class Tetris {
     this.tetromino.column -= 1;
     if (!this.isValid()) {
       this.tetromino.column += 1;
+    } else {
+      this.calculateGhostPosition();
     }
   }
 
@@ -64,6 +66,8 @@ export class Tetris {
     this.tetromino.column += 1;
     if (!this.isValid()) {
       this.tetromino.column -= 1;
+    } else {
+      this.calculateGhostPosition();
     }
   }
 
@@ -73,7 +77,14 @@ export class Tetris {
     this.tetromino.matrix = rotatedMatrix;
     if (!this.isValid()) {
       this.tetromino.matrix = oldMatrix;
+    } else {
+      this.calculateGhostPosition();
     }
+  }
+
+  dropTetrominoDown() {
+    this.tetromino.row = this.tetromino.ghostRow;
+    this.placeTetromino();
   }
 
   isValid() {

@@ -11,7 +11,7 @@ body {
   align-items: center;
   height: 100vh;
   height: 100svh;
-  background: linear-gradient(90deg, wheat, pink, purple);
+  background: linear-gradient(wheat, pink, purple);
   font-family: Arial, Helvetica, sans-serif;
   user-select: none;
 }
@@ -35,7 +35,7 @@ body {
 }
 
 .grid > div.ghost {
-  background-color: rgb(230, 79, 94);
+  background-color: rgb(230, 79, 94, 0.3);
 }
 
 .grid > div.I {
